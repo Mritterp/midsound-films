@@ -323,10 +323,9 @@ footer {
 <!-- HERO -->
 <header class="hero">
   <div class="hero-video-wrap">
-    <iframe id="heroBgIframe"
-      src="https://www.youtube.com/embed/B0wUdnMQ28g?autoplay=1&mute=1&controls=0&loop=0&playlist=B0wUdnMQ28g&start=637&modestbranding=1&playsinline=1&enablejsapi=1"
-      title="American Melodies — Joe Schaefer"
-      allow="autoplay; encrypted-media"></iframe>
+    <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;">
+      <source src="AM_Hero_Clip.mp4" type="video/mp4">
+    </video>
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-grain"></div>
@@ -446,24 +445,6 @@ footer {
 </footer>
 
 <script>
-// Hero background video — loop back to start=637 on end
-window.addEventListener('message', e => {
-  if (e.origin !== 'https://www.youtube.com') return;
-  try {
-    const data = JSON.parse(e.data);
-    if (data.event === 'onStateChange' && data.info === 0) {
-      // Video ended — seek back to 637s and play
-      document.getElementById('heroBgIframe').contentWindow.postMessage(
-        JSON.stringify({event:'command', func:'seekTo', args:[637, true]}),
-        'https://www.youtube.com'
-      );
-      document.getElementById('heroBgIframe').contentWindow.postMessage(
-        JSON.stringify({event:'command', func:'playVideo', args:[]}),
-        'https://www.youtube.com'
-      );
-    }
-  } catch(err) {}
-});
 
 const modal = document.getElementById('videoModal');
 const modalIframe = document.getElementById('modalIframe');
