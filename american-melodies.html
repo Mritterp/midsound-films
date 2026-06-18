@@ -362,12 +362,22 @@ footer {
 
     <div class="film" data-video="2nV87G2FKsc" data-title="Joe Schaefer in Three Songs" data-tag="Documentary" style="cursor:pointer;">
       <div class="film-thumb">
-        <img src="https://i.ytimg.com/vi/2nV87G2FKsc/maxresdefault.jpg" alt="Joe Schaefer in Three Songs" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;">
+        <img src="https://i.ytimg.com/vi/2nV87G2FKsc/maxresdefault.jpg" alt="Joe Schaefer in Three Songs" onerror="this.src='https://i.ytimg.com/vi/2nV87G2FKsc/hqdefault.jpg'" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;">
         <div class="film-thumb-overlay"></div>
         <div class="film-play"><div class="play-ring"><div class="play-tri"></div></div></div>
       </div>
       <div class="film-label">Documentary</div>
       <div class="film-title">Joe Schaefer in Three Songs</div>
+    </div>
+
+    <div class="film" data-video="B0wUdnMQ28g" data-title="American Melodies — Joe Schaefer (Full Documentary)" data-tag="Documentary" style="cursor:pointer;">
+      <div class="film-thumb">
+        <img src="https://i.ytimg.com/vi/B0wUdnMQ28g/maxresdefault.jpg" alt="American Melodies — Joe Schaefer Full Documentary" onerror="this.src='https://i.ytimg.com/vi/B0wUdnMQ28g/hqdefault.jpg'" style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;">
+        <div class="film-thumb-overlay"></div>
+        <div class="film-play"><div class="play-ring"><div class="play-tri"></div></div></div>
+      </div>
+      <div class="film-label">Documentary · Full Episode</div>
+      <div class="film-title">American Melodies — Joe Schaefer</div>
     </div>
 
     <div class="film" data-video="kOQMN3CKRE8" data-title="American Melodies — Virginia Masland" data-tag="Documentary" style="cursor:pointer;">
@@ -394,20 +404,22 @@ footer {
 </section>
 
 <!-- LIGHTBOX MODAL -->
-<div id="videoModal" style="display:none; position:fixed; inset:0; z-index:500; background:rgba(13,17,14,0.93); backdrop-filter:blur(10px); align-items:center; justify-content:center;">
-  <div style="position:relative; width:90vw; max-width:1100px;">
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; padding:0 0.25rem;">
-      <div>
-        <div id="modalTag" style="font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase; color:rgba(245,240,232,0.35); margin-bottom:0.3rem;"></div>
-        <div id="modalTitle" style="font-family:Georgia,serif; font-style:italic; font-size:1.3rem; color:#F5F0E8;"></div>
+<div id="videoModal" style="display:none; position:fixed; inset:0; z-index:500; background:rgba(13,17,14,0.97); align-items:center; justify-content:center;">
+  <!-- Close button — fixed top-right, always visible -->
+  <button id="modalClose" style="position:fixed; top:1.25rem; right:1.5rem; z-index:510; background:rgba(245,240,232,0.12); border:1.5px solid rgba(245,240,232,0.4); color:#F5F0E8; width:48px; height:48px; border-radius:4px; cursor:pointer; font-size:1.5rem; display:flex; align-items:center; justify-content:center; transition:background 0.2s;" onmouseover="this.style.background='rgba(245,240,232,0.22)'" onmouseout="this.style.background='rgba(245,240,232,0.12)'">&times;</button>
+  <!-- Video + meta -->
+  <div style="width:100vw; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:3.5rem 2rem 2rem;">
+    <div style="width:100%; max-width:1400px;">
+      <div style="margin-bottom:0.75rem; padding:0 0.25rem;">
+        <div id="modalTag" style="font-size:0.62rem; letter-spacing:0.16em; text-transform:uppercase; color:rgba(245,240,232,0.35); margin-bottom:0.25rem;"></div>
+        <div id="modalTitle" style="font-family:Georgia,serif; font-style:italic; font-size:1.2rem; color:#F5F0E8;"></div>
       </div>
-      <button id="modalClose" style="background:none; border:1px solid rgba(245,240,232,0.2); color:rgba(245,240,232,0.6); width:38px; height:38px; border-radius:2px; cursor:pointer; font-size:1.1rem; display:flex; align-items:center; justify-content:center; flex-shrink:0;">&times;</button>
-    </div>
-    <div style="position:relative; aspect-ratio:16/9; background:#0d110e; border-radius:2px; overflow:hidden;">
-      <iframe id="modalIframe" src="" style="position:absolute; inset:0; width:100%; height:100%; border:0;" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
-    </div>
-    <div style="margin-top:1rem; text-align:right;">
-      <a id="modalYTLink" href="#" target="_blank" rel="noopener" style="font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(245,240,232,0.3); text-decoration:none; border-bottom:1px solid rgba(245,240,232,0.15); padding-bottom:1px;">Watch on YouTube →</a>
+      <div style="position:relative; aspect-ratio:16/9; background:#000; overflow:hidden;">
+        <iframe id="modalIframe" src="" style="position:absolute; inset:0; width:100%; height:100%; border:0;" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+      </div>
+      <div style="margin-top:0.75rem; text-align:right;">
+        <a id="modalYTLink" href="#" target="_blank" rel="noopener" style="font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(245,240,232,0.3); text-decoration:none; border-bottom:1px solid rgba(245,240,232,0.15); padding-bottom:1px;">Watch on YouTube →</a>
+      </div>
     </div>
   </div>
 </div>
