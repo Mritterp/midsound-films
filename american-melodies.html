@@ -323,8 +323,8 @@ footer {
 <!-- HERO -->
 <header class="hero">
   <div class="hero-video-wrap">
-    <iframe
-      src="https://www.youtube.com/embed/B0wUdnMQ28g?autoplay=1&mute=1&controls=0&loop=1&playlist=B0wUdnMQ28g&start=637&modestbranding=1&playsinline=1"
+    <iframe id="heroBgIframe"
+      src="https://www.youtube.com/embed/B0wUdnMQ28g?autoplay=1&mute=1&controls=0&loop=0&playlist=B0wUdnMQ28g&start=637&modestbranding=1&playsinline=1&enablejsapi=1"
       title="American Melodies — Joe Schaefer"
       allow="autoplay; encrypted-media"></iframe>
   </div>
@@ -405,10 +405,12 @@ footer {
 
 <!-- LIGHTBOX MODAL -->
 <div id="videoModal" style="display:none; position:fixed; inset:0; z-index:500; background:#000; align-items:center; justify-content:center;">
+  <!-- Transparent backdrop — clicking anywhere outside video closes modal -->
+  <div id="modalBackdrop" style="position:absolute; inset:0; z-index:1; cursor:pointer;"></div>
   <!-- X button — always on top -->
   <button id="modalClose" style="position:fixed; top:1rem; right:1rem; z-index:510; background:rgba(0,0,0,0.6); border:2px solid rgba(255,255,255,0.55); color:#fff; width:52px; height:52px; border-radius:6px; cursor:pointer; font-size:1.8rem; line-height:1; display:flex; align-items:center; justify-content:center; transition:background 0.2s, border-color 0.2s;" onmouseover="this.style.background='rgba(0,0,0,0.85)';this.style.borderColor='rgba(255,255,255,0.9)'" onmouseout="this.style.background='rgba(0,0,0,0.6)';this.style.borderColor='rgba(255,255,255,0.55)'">&times;</button>
   <!-- Video fills viewport maintaining 16:9 -->
-  <div style="position:relative; width:min(100vw, 177.78vh); height:min(100vh, 56.25vw);">
+  <div style="position:relative; z-index:2; width:min(100vw, 177.78vh); height:min(100vh, 56.25vw);">
     <iframe id="modalIframe" src="" style="position:absolute; inset:0; width:100%; height:100%; border:0;" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
     <!-- Title overlay at bottom-left -->
     <div style="position:absolute; bottom:0; left:0; right:0; padding:1.2rem 1.5rem; background:linear-gradient(to top, rgba(0,0,0,0.7), transparent); pointer-events:none;">
@@ -442,6 +444,25 @@ footer {
 </footer>
 
 <script>
+// Hero background video — loop back to start=637 on end
+window.addEventListener('message', e => {
+  if (e.origin !== 'https://www.youtube.com') return;
+  try {
+    const data = JSON.parse(e.data);
+    if (data.event === 'onStateChange' && data.info === 0) {
+      // Video ended — seek back to 637s and play
+      document.getElementById('heroBgIframe').contentWindow.postMessage(
+        JSON.stringify({event:'command', func:'seekTo', args:[637, true]}),
+        'https://www.youtube.com'
+      );
+      document.getElementById('heroBgIframe').contentWindow.postMessage(
+        JSON.stringify({event:'command', func:'playVideo', args:[]}),
+        'https://www.youtube.com'
+      );
+    }
+  } catch(err) {}
+});
+
 const modal = document.getElementById('videoModal');
 const modalIframe = document.getElementById('modalIframe');
 const modalTitle = document.getElementById('modalTitle');
@@ -468,7 +489,7 @@ function closeModal() {
 }
 
 modalClose.addEventListener('click', closeModal);
-modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.getElementById('modalBackdrop').addEventListener('click', closeModal);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 </script>
 </body>
