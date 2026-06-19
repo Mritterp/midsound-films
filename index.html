@@ -882,6 +882,30 @@ footer {
 .g3 { background: linear-gradient(155deg, #304050 0%, #202A35 50%, #101520 100%); }
 .g4 { background: linear-gradient(155deg, #2A2A25 0%, #1A1A18 100%); }
 .g5 { background: linear-gradient(155deg, #3A3020 0%, #1E180E 100%); }
+
+@media (max-width: 768px) {
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { gap: 1.2rem; }
+  .nav-links a { font-size: 0.6rem; }
+  .nav-cta { font-size: 0.6rem; padding: 0.5rem 0.9rem; }
+  .hero-content { padding: 0 1.5rem; }
+  .hero-headline { font-size: clamp(2.2rem, 10vw, 6.5rem); }
+  .hero-sub { font-size: 0.9rem; }
+  .section { padding: 4rem 1.5rem; }
+  .work-thumb { aspect-ratio: 16/7; }
+  .work-title { font-size: 1.1rem; }
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .services-header { grid-template-columns: 1fr; gap: 2rem; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .channel-band { flex-direction: column; }
+  footer { padding: 1.8rem 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .hero-headline { font-size: clamp(2rem, 11vw, 3.5rem); }
+  .work-meta { padding: 1rem 1.2rem; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
